@@ -1,0 +1,30 @@
+
+
+delete_site() {
+    local site_name="$1"
+    
+    docker stop "${site_name}_web"
+    docker rm "${site_name}_web"
+    docker stop "${site_name}_db"
+    docker rm "${site_name}_db"
+
+    
+    rm -rf "/var/www/${site_name}"
+}
+
+case "$1" in
+    create)
+       
+        echo "Creating site..."
+        ;;
+    delete)
+        
+        site_name="$2"
+        echo "Deleting site: $site_name"
+        delete_site "$site_name"
+        ;;
+    *)
+        echo "Invalid subcommand. Available subcommands: create, delete"
+        exit 1
+        ;;
+esac
