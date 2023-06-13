@@ -1,34 +1,18 @@
 
 start_site() {
-    echo "Starting site containers..."
-    
+    echo "Starting the site..."
     docker-compose up -d
-    echo "Site containers started."
 }
-
 
 stop_site() {
-    echo "Stopping site containers..."
-    
+    echo "Stopping the site..."
     docker-compose down
-    echo "Site containers stopped."
 }
 
-case "$1" in
-    start)
-        start_site
-        ;;
-    stop)
-        stop_site
-        ;;
-    enable)
-        start_site
-        ;;
-    disable)
-        stop_site
-        ;;
-    *)
-        echo "Usage: $0 {start|stop|enable|disable}"
-        exit 1
-        ;;
-esac
+if [ "$1" == "start" ]; then
+    start_site
+elif [ "$1" == "stop" ]; then
+    stop_site
+else
+    echo "Invalid command. Please use 'start' or 'stop'."
+fi
