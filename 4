@@ -1,0 +1,9 @@
+
+
+
+read -p "Enter the site name: " site_name
+
+echo "127.0.0.1    $site_name" | sudo tee -a /etc/hosts
+
+
+echo "Entry added to /etc/hosts for $site_name pointing to localhost."
