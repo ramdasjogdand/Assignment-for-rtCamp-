@@ -1,0 +1,34 @@
+
+start_site() {
+    echo "Starting site containers..."
+    
+    docker-compose up -d
+    echo "Site containers started."
+}
+
+
+stop_site() {
+    echo "Stopping site containers..."
+    
+    docker-compose down
+    echo "Site containers stopped."
+}
+
+case "$1" in
+    start)
+        start_site
+        ;;
+    stop)
+        stop_site
+        ;;
+    enable)
+        start_site
+        ;;
+    disable)
+        stop_site
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|enable|disable}"
+        exit 1
+        ;;
+esac
