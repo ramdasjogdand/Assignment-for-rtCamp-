@@ -1,22 +1,9 @@
 
-check_website() {
-    # Perform a HEAD request and check the response status
-    response=$(curl -Is "http://example.com" | head -n 1)
-    if [[ $response == *"200 OK"* ]]; then
-        echo "The website is up and healthy!"
-        return 0
-    else
-        echo "The website is not reachable or experiencing issues."
-        return 1
-    fi
-}
-check_website
-
-
-if [ $? -eq 0 ]; then
-    read -p "The website is up and healthy. Do you want to open it in a browser? (y/n): " choice
-    if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
-  
-        open "http://example.com"
-    fi
+response=$(curl -Is https://example.com | head -n 1)
+if [[ "$response" == *"200 OK"* ]]; then
+    echo "example.com is up and healthy!"
+    echo "Opening example.com in a browser..."
+    xdg-open https://example.com  # Replace with the appropriate command for your system/browser
+else
+    echo "example.com is currently unavailable."
 fi
