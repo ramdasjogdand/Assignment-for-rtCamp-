@@ -1,1 +1,24 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/html:/var/www/html
+    depends_on:
+      - php
+ php:
+    image: php:latest
+    volumes:
+      - ./php:/var/www/html
+ mysql:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=your_password
+    volumes:
+      - ./mysql:/var/lib/mysql
 
