@@ -1,1 +1,17 @@
-Not Ansering
+
+if [ "$#" -ne 1 ]; then
+    echo "Please provide the site name as a command-line argument."
+    exit 1
+fi
+
+site_name="$1"
+wp_cli_path="/path/to/wp-cli.phar"  # Update with the actual path to wp-cli.phar
+
+php "$wp_cli_path" core download
+
+php "$wp_cli_path" config create --dbname=your_db_name --dbuser=your_db_user --dbpass=your_db_password
+
+php "$wp_cli_path" core install --url=your_site_url --title=your_site_title --admin_user=your_admin_user --admin_password=your_admin_password --admin_email=your_admin_email
+
+echo "WordPress site created successfully!"
+
